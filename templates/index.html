@@ -1,28 +1,17 @@
-<%! import os %>
-
-<%
-    rows = [[v for v in range(0,10)] for row in range(0,10)]
-%>
-
-<%def name="makerow(row)">
-    <tr>
-    % for name in row:
-        <td>${name}</td>\
-    % endfor
-    </tr>
-</%def>
-
+<%namespace name='static' file='/common/static_pipeline.html'/>
 <html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>django pipeline demo</title>
+    <link rel="stylesheet" href="${static.url('css/index.css')}" type="text/css" media="all" />
+  </head>
   <body>
-    ${os.path.sep}
-    <table>
-        % for row in rows:
-            ${makerow(row)}
-        % endfor
-    </table>
+    index.html
+    <div class="black">
+      black
+    </div>
     <div>
-      ${2*3}
+      none
     </div>
   </body>
 </html>
-

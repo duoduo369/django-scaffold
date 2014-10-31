@@ -1,0 +1,10 @@
+<%!
+from django.contrib.staticfiles.storage import staticfiles_storage
+%>
+
+<%def name='url(file)'><%
+try:
+    url = staticfiles_storage.url(file)
+except:
+    url = file
+%>${url}</%def>

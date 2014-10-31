@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for djangomako_demo project.
+# Django settings for django_pipeline_demo project.
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -107,10 +107,10 @@ MIDDLEWARE_CLASSES = (
     'djangomako.middleware.MakoMiddleware',
 )
 
-ROOT_URLCONF = 'djangomako_demo.urls'
+ROOT_URLCONF = 'django_pipeline_demo.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'djangomako_demo.wsgi.application'
+WSGI_APPLICATION = 'django_pipeline_demo.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

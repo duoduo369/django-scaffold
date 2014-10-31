@@ -6,7 +6,7 @@ django默认的模板功能还可以，但是不能直接用python的语法，ma
 
 [mako](http://www.makotemplates.org/)
 [django-mako](https://github.com/jurgns/django-mako)
-[demo](https://github.com/duoduo369/djangomako_demo)
+[demo](https://github.com/duoduo369/django_pipeline_demo)
 
 mako基本用法
 ---

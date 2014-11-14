@@ -14,6 +14,7 @@ then
   new_django_base=$(python -c "import os; print os.path.join('$new_project_path', '$new_django_name')")
   mv $django_base $new_django_base
 fi
+mv $new_project_path/deploy/nginx/$old_django_name.conf $new_project_path/deploy/nginx/$new_django_name.conf
 cd $new_project_path && $(grep $old_django_name -ril ./ | xargs sed -i "s/$old_django_name/$new_django_name/g")
 echo "new files in: $new_project_path"
 echo "please 'cd $new_project_path && grep $old_django_name -ril' all if all string has replaced!"

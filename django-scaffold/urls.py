@@ -6,8 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'django_pipeline_demo.views.home', name='home'),
-    # url(r'^django_pipeline_demo/', include('django_pipeline_demo.foo.urls')),
+    # url(r'^$', 'django-scaffold.views.home', name='home'),
+    # url(r'^django-scaffold/', include('django-scaffold.foo.urls')),
     url(r'', include('app.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

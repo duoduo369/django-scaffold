@@ -1,88 +1,32 @@
-用django-pipeline为静态文件添加hash
+django-scaffold
 ===
 
-为什么需要hash静态文件？
+django-scaffold是一个快速初始化django项目的脚手架，目前django版本采用1.4.8,不过脚手架里面可以比较方便的切到1.6.1，个人用暂时没问题，有问题请提issue.
+
+为什么用1.4.8?
 ---
+1. 因为足够.
+2. django不是因为django的本版更高而更牛逼.
+3. 有些库在我用的时候还是支持稳定的1.4.8的
+4. 1.4.8的基本配置，文件结构和1.6一样(没错，oauth)
 
-请看[大公司里怎样开发和部署前端代码？](http://www.zhihu.com/question/20790576) 张云龙的答案。
-
-这样，当静态文件有修改时，会很方便的拿到最新的修改版本，而未修改的静态文件则依然使用缓存。这样避免了修改后用户静态文件不更新的尴尬，并且可以充分利用缓存。
-
-demo
+脚手架提供了什么
 ---
+1. mako支持
+2. 静态文件collect后添加hash
+3. rename脚本，可以直接将django-scaffold改为你想要的名字
 
-[django_pipeline_demo](https://github.com/duoduo369/django_pipeline_demo)
-
-安装
+将来提供什么 TODO List
 ---
-    sudo mkdir /opt/projects
-    git clone https://github.com/duoduo369/django_pipeline_demo.git
-    cd django_pipeline_demo
-    ln -s $(pwd) /opt/projects
-    ln -s /opt/projects/django_pipeline_demo/deploy/nginx/django_pipeline.conf /etc/nginx/sites-enabled
-    pip install -r requirements.txt
-    python manage.py runserver 0.0.0.0:9888
-    nginx -s reload
-    vim /etc/hosts 添加 127.0.0.1:9888 django_pipline_demo.com
-
-
-django的库pipeline
----
-
-[mako](http://www.makotemplates.org/),  [django-mako](https://github.com/jurgns/django-mako),  [django-pipeline-demo](https://github.com/duoduo369/django_pipeline_demo)
-
-效果是这样的,以 [django_pipeline_demo](https://github.com/duoduo369/django_pipeline_demo) 为例。
-
-先说最终用法
----
-
-1. debug必须为False(上线本来就是False),如果为True则使用django默认查找静态文件的方式,不会使用pipeline。
-2. `python manage.py collectstatic`
-3. 重启django项目
-
-重点代码解释
----
-settings.py的几个配置,
-如何安装配置django-pipeline,请移步[文档](http://django-pipeline.readthedocs.org/).
-
-解释几个collect有关的配置
-
-    # python manage.py collectstatic 后文件会扔到STATIC_ROOT下面
-    STATIC_ROOT = './statics'
-
-    # django的模板会从这些目录下查找
-    TEMPLATE_DIRS = (
-        os.path.join(BASE_DIR, 'templates'),
-    )
-
-    # 开发时css的路径，collectstatic会从这里查找然后丢到STATIC_ROOT下
-    # 使用pipeline后会在静态文件中添加hash码，例如css/index.css
-    # collectstatic后会变成 css/index.as1df14jah8dfh.css
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, "static_dev"),
-    )
-
-
-templates/common/static_pipeline.html
-
-    这是用mako定义了一个url，以后静态文件使用这个url导入，就可以找到hash的版本了。
-
-    <%!
-    from django.contrib.staticfiles.storage import staticfiles_storage
-    %>
-
-    <%def name='url(file)'><%
-    try:
-        url = staticfiles_storage.url(file)
-    except:
-        url = file
-    %>${url}</%def>
-
-index.html
-
-    首先导入/common/static_pipeline.html,需要引用静态文件的地方使用${static.url('未hash的文件路径')}
-
-    <%namespace name='static' file='/common/static_pipeline.html'/>
-    ....
-        <link rel="stylesheet" href="${static.url('css/index.css')}" type="text/css" media="all" />
-    ....
+1. xadmin或者xadmin2
+2. supervisor和gunicorn的基本配置
+3. nginx的基本配置
+4. log配置
+5. 方便的开启关闭debug
+6. python-oauth的一个fork版本，添加weibo, weixin等中国backend
+7. 传文件
+8. 切图片
+9. 分页
+10. 最新的requirements.txt
+11. rest service
+12. 权限的一些东西

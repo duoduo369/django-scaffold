@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for django_pipeline_demo project.
+# Django settings for django-scaffold project.
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -108,13 +108,13 @@ MIDDLEWARE_CLASSES = (
     'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
-ROOT_URLCONF = 'django_pipeline_demo.urls'
+ROOT_URLCONF = 'django-scaffold.urls'
 
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'django_pipeline_demo.wsgi.application'
+WSGI_APPLICATION = 'django-scaffold.wsgi.application'
 
 
 INSTALLED_APPS = (

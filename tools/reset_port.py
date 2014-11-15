@@ -5,8 +5,8 @@ import click
 import os
 import json
 
-PORT_CONFIG = json.loads('./port.json')
-# deploy/nginx/django-scaffold-dev.conf
+with open('./port.json') as f:
+    PORT_CONFIG = json.load(f)
 
 RENAME_DEV_FILES = [
     'deploy/nginx/django-scaffold-dev.conf',
@@ -32,7 +32,8 @@ def get_config(reset_type):
 
 @click.command()
 @click.option('--reset_type', default='dev', help='port type: [dev|master], default dev')
-def reset_port(reset_type):
+@click.option('--new_port', prompt='new port', help='Please input new port')
+def reset_port(reset_type, new_port):
     this_file_path = os.path.split(os.path.realpath(__file__))[0]
     project_path = os.path.split(this_file_path)[0]
     config = get_config(reset_type)

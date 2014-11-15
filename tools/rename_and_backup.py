@@ -8,6 +8,10 @@ import click
 import os
 from sh import cp, mv
 
+NGINX_CONFS = [
+    'deploy/nginx/{}-dev.conf',
+    'deploy/nginx/{}-master.conf',
+]
 
 @click.command()
 @click.option('--newname', prompt='new project name', help='Please input new project name.')
@@ -21,8 +25,9 @@ def rename(newname):
     django_settings_dir = os.path.join(new_project_path, oldname)
     if os.path.exists(django_settings_dir):
         mv(django_settings_dir, os.path.join(new_project_path, newname))
-    nginx_dev_conf = '{}/deploy/nginx/{}-dev.conf'
-    mv(nginx_dev_conf.format(new_project_path, oldname), nginx_dev_conf.format(new_project_path, newname))
+    for nginx_conf in NGINX_CONFS:
+        file_path = os.path.join(new_project_path, nginx_conf)
+        mv(nginx_conf.format(file_path, oldname), nginx_conf.format(file_path, newname))
     cmd ='cd {} && grep {} -ril ./ | xargs sed -i "s/{}/{}/g"'.format(new_project_path, oldname, oldname, newname)
     os.system(cmd)
     click.echo('new files in {}'.format(new_project_path))

@@ -10,11 +10,13 @@ with open('./port.json') as f:
 
 RENAME_DEV_FILES = [
     'deploy/nginx/django-scaffold-dev.conf',
+    'tools/run_dev.py'
     'tools/port.json'
 ]
 
 RENAME_MASTER_FILES = [
     'deploy/nginx/django-scaffold-master.conf',
+    'tools/run_master.py'
     'tools/port.json'
 ]
 

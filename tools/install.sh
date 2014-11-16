@@ -20,6 +20,8 @@ fi
 echo "[global]" >> ~/.pip/pip.conf
 echo "index-url = http://pypi.douban.com/simple" >> ~/.pip/pip.conf
 
+deactivate
+
 echo "install virtualenv"
 pip install virtualenv
 
@@ -46,3 +48,4 @@ pip install -r /opt/projects/django-scaffold/requirements.txt
 
 echo "mkdir log dirs"
 mkdir -p /var/log/django-scaffold
+mkdir -p /var/log/django-scaffold/supervisordchild

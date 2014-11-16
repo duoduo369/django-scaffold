@@ -7,10 +7,13 @@ click==3.3
 django-mako==0.1.3
 django-pipeline==1.3.26
 futures==2.2.0
+gunicorn==18.0
 logilab-common==0.63.0
+meld3==1.0.0
 pylint==1.3.1
 pylint-django==0.5.5
 pylint-plugin-utils==0.2.2
 sh==1.09
 six==1.8.0
+supervisor==3.1.1
 wsgiref==0.1.2

@@ -5,6 +5,8 @@ if [ "x$(whoami)" != "xroot" ]; then
     exit 1
 fi
 
+echo "install linux dependence"
+apt-get install memcached nginx
 
 echo "install pip"
 apt-get install python-pip

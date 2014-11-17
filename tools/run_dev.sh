@@ -5,7 +5,7 @@ case $1 in
         exit ${ret}
         ;;
     "stop")
-        ps x | grep django-scaffold | grep python | awk '{print $1}' | xargs kill
+        netstat -ntlp | grep 10000 | awk '{print $7}' | awk -F/ '/^[0-9]/ {print $1}' | uniq | xargs kill
         ;;
     "restart")
         $0 stop

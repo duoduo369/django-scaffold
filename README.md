@@ -40,18 +40,19 @@ dev master两个环境:
 文件结构
 ---
  $ tree -L 1
-.
-├── app
-├── deploy
-├── django-scaffold
-├── LICENSE
-├── manage.py
-├── README.md
-├── requirements.txt
-├── static_dev
-├── statics
-├── templates
-└── tools
+
+    .
+    ├── app
+    ├── deploy
+    ├── django-scaffold
+    ├── LICENSE
+    ├── manage.py
+    ├── README.md
+    ├── requirements.txt
+    ├── static_dev
+    ├── statics
+    ├── templates
+    └── tools
 
 django-scaffold 项目名，下面放基本的settings配置
 templates html模板丢在这里

@@ -6,7 +6,12 @@ from logging.handlers import SysLogHandler
 
 LOG_LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
 
-def get_logger_config(debug=False, local_loglevel='INFO', console_loglevel=None, service_variant=None, syslog_addr=('localhost', 514)):
+def get_logger_config(
+        log_dir="/var/log/django-scaffold",
+        log_filename="dev-stdout.log",
+        debug=False, local_loglevel='INFO',
+        console_loglevel=None, service_variant=None,
+        syslog_addr=('localhost', 514)):
     '''
     debug: django settings debug
     syslog_addr: 远端syslog端口, tuple (ip, 514)
@@ -65,7 +70,19 @@ def get_logger_config(debug=False, local_loglevel='INFO', console_loglevel=None,
             },
         }
     }
-    if not debug:
+    if debug:
+        log_file_path = os.path.join(log_dir, log_filename)
+        logger_config['handlers'].update({
+            'local': {
+                'class': 'logging.handlers.RotatingFileHandler',
+                'level': local_loglevel,
+                'formatter': 'standard',
+                'filename': log_file_path,
+                'maxBytes': 1024 * 1024 * 2,
+                'backupCount': 5,
+            },
+        })
+    else:
         # for production environments we will only
         # log INFO and up
         logger_config['loggers']['']['level'] = 'INFO'

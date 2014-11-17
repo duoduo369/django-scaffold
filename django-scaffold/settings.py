@@ -140,3 +140,16 @@ INSTALLED_APPS = (
 from . import logsettings
 
 LOGGING = logsettings.get_logger_config(debug=DEBUG)
+
+# memcached
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "KEY_FUNCTION": "utils.memcache.safe_key",
+        "KEY_PREFIX": "memcached_default",
+        "TIMEOUT": str(60 * 3),
+        "LOCATION": [
+            "localhost:11211"
+        ],
+    },
+}

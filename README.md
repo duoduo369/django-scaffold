@@ -102,8 +102,7 @@ document
 tools
 ---
 
-rename_and_backup.py
----
+###rename_and_backup.py
 备份并且重命名脚本, 会将项目中所有的old name全部替换为new name,包括各种配置文件等.
 
     cd /opt/projects/{your old project name}/tools

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 case $1 in
     "start")
-        python /opt/projects/django-scaffold/manage.py runserver 0.0.0.0:10000 >> /var/log/django-scaffold/dev-stdout.log 2>&1 &
+        python /opt/projects/django-scaffold/manage.py  runserver --settings=django-scaffold.settings-dev 0.0.0.0:10000 >> /var/log/django-scaffold/dev-stdout.log 2>&1 &
         exit ${ret}
         ;;
     "stop")

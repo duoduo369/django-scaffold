@@ -102,7 +102,7 @@ document
 tools
 ---
 
-###rename_and_backup.py
+####rename_and_backup.py
 备份并且重命名脚本, 会将项目中所有的old name全部替换为new name,包括各种配置文件等.
 
     cd /opt/projects/{your old project name}/tools
@@ -110,32 +110,26 @@ tools
     输入文件名
     脚本执行结束后会在 /opt/projects/{your new project name}有新的项目
 
-reset_port.py
----
+####reset_port.py
 端口重置脚本，因为一台机器上django的端口可能之前就被占用了, port.json显示了此项目使用的端口(不要修改这个json文件)
 
-install.sh
----
+####install.sh
 安装pip
 配置豆瓣源
 建立virtualenv
 安装requirements
 建立log文件夹
 
-config_dev_nginx
----
+####config_dev_nginx
 将dev版本的nginx丢到nginx配置环境，并且reload nginx
 
-config_master_nginx
----
+####config_master_nginx
 将master版本的nginx丢到nginx配置环境，并且reload nginx
 
-run_dev.sh
----
+####run_dev.sh
 使用django manage.py runserver 的方式运行测试环境，采用settings-dev.py这个配置文件
 
-run_master.sh
----
+####run_master.sh
 supervisor, gunicorn, nginx的方式运行正式环境
 
 log

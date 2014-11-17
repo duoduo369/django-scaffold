@@ -54,3 +54,10 @@ rename_and_backup.py
     ./rename_and_backup.py
     输入文件名
     脚本执行结束后会在 /opt/projects/{your new project name}有新的项目
+
+log
+---
+dev log: `tail -f /var/log/django-scaffold/dev-stdout.log`
+master log: `tail-f /var/log/django-scaffold/stderr.log`
+nginx access log: `tail -f /var/log/django-scaffold/ngaccess.log`
+nginx error log: `tail -f /var/log/django-scaffold/ngerror.log`

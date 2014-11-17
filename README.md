@@ -134,7 +134,8 @@ supervisor, gunicorn, nginx的方式运行正式环境
 
 log
 ---
-dev log: `tail -f /var/log/django-scaffold/dev-stdout.log`
-master log: `tail-f /var/log/django-scaffold/stderr.log`
-nginx access log: `tail -f /var/log/django-scaffold/ngaccess.log`
-nginx error log: `tail -f /var/log/django-scaffold/ngerror.log`
+
+    dev log: `tail -f /var/log/django-scaffold/dev-stdout.log`
+    master log: `tail-f /var/log/django-scaffold/stderr.log`
+    nginx access log: `tail -f /var/log/django-scaffold/ngaccess.log`
+    nginx error log: `tail -f /var/log/django-scaffold/ngerror.log`

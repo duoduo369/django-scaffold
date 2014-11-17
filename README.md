@@ -86,6 +86,7 @@ dev master两个环境:
 6. install脚本，一键安装依赖
 7. config_nginx脚本，当你修改代码的nginx配置时,执行此脚本可以更新nginx
 8. run脚本，分为可以简化django启停命令，分为dev和master两种环境
+9. memcached
 
 将来提供什么 TODO List
 ---
@@ -95,7 +96,6 @@ dev master两个环境:
     . 传文件
     . 切图片
     . 分页
-    . 最新的requirements.txt
     . rest service
     . 权限的一些东西
     . 正式上线修改nginx域名的脚本

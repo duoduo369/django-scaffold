@@ -6,10 +6,11 @@ BASE_PATH = '/opt/projects/django-scaffold'
 
 max_requests = 5000
 
+timeout = 300
+
+preload_app = True
+
 user = 'root'
 group = 'root'
-
-accesslog = '/var/log/django-scaffold/gunicorn-access.log'
-errorlog =  '/var/log/django-scaffold/gunicorn-error.log'
 
 pidfile = '/run/django-scaffold-gunicorn.pid'

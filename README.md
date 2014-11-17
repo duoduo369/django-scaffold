@@ -33,9 +33,13 @@ dev master两个环境:
 1. linux or unix
 2. 在你个人项目下建立projects文件夹，相对于/opt建立软连接 `cd ~ && mkdir projects && cd projects && sudo ln -s $(pwd)/projects /opt`
 3. 将项目克隆到`/opt/projects`下
-4. 脚本使用顺序: 第一步,你需要重命名clone回来的项目，用这个脚本`rename_and_backup.py`;第二步,
-你需要配置项目运行时的端口号`reset_port.py`;第三步，安装各种依赖`install.sh`(这个脚本执行一次即可);
-第四步，配置nginx`config_dev_nginx.sh`和`config_dev_nginx.sh`,第五步, 运行项目`run_dev.sh` 和`run_master.sh`.其中你可以看到有dev, master两个版本, dev采用django 默认的runserver来做，并且配置文件中DEBUG=True,master版本采用supervisor, gunicorn来做python容器，静态文件有nginx代理
+4. 脚本使用顺序
+
+    第一步,你需要重命名clone回来的项目，用这个脚本`rename_and_backup.py`;
+    第二步, 你需要配置项目运行时的端口号`reset_port.py`;
+    第三步，安装各种依赖`install.sh`(这个脚本执行一次即可);
+    第四步，配置nginx`config_dev_nginx.sh`和`config_dev_nginx.sh`;
+    第五步, 运行项目`run_dev.sh` 和`run_master.sh`.其中你可以看到有dev, master两个版本, dev采用django 默认的runserver来做，并且配置文件中DEBUG=True,master版本采用supervisor, gunicorn来做python容器，静态文件有nginx代理
 
 文件结构
 ---
@@ -54,16 +58,16 @@ dev master两个环境:
     ├── templates
     └── tools
 
-django-scaffold 项目名，下面放基本的settings配置
-templates html模板丢在这里
-static_dev 开发是静态文件放这里(css/js等)
-statics collectstatic最终的目标路径 nginx查找的目录
-deploy部署相关的配置
-tools各种有用的脚本
-requirements pip依赖
-app 就是普通的模块
-/var/log/django-scaffold下有各种log
-/run/下有gunicorn supervisor的pid
+    django-scaffold 项目名，下面放基本的settings配置
+    templates html模板丢在这里
+    static_dev 开发是静态文件放这里(css/js等)
+    statics collectstatic最终的目标路径 nginx查找的目录
+    deploy部署相关的配置
+    tools各种有用的脚本
+    requirements pip依赖
+    app 就是普通的模块
+    /var/log/django-scaffold下有各种log
+    /run/下有gunicorn supervisor的pid
 
 为什么django用1.4.8?
 ---
@@ -85,16 +89,17 @@ app 就是普通的模块
 
 将来提供什么 TODO List
 ---
-. xadmin或者xadmin2
-. python-oauth的一个fork版本，添加weibo, weixin等中国backend
-. 传文件
-. 切图片
-. 分页
-. 最新的requirements.txt
-. rest service
-. 权限的一些东西
-. 正式上线修改nginx域名的脚本
-. 单元测试时的sqlite数据库
+
+    . xadmin或者xadmin2
+    . python-oauth的一个fork版本，添加weibo, weixin等中国backend
+    . 传文件
+    . 切图片
+    . 分页
+    . 最新的requirements.txt
+    . rest service
+    . 权限的一些东西
+    . 正式上线修改nginx域名的脚本
+    . 单元测试时的sqlite数据库
 
 document
 ===

@@ -72,28 +72,29 @@ dev master两个环境:
 
 脚手架目前提供了什么
 ---
-1. mako支持
-2. 静态文件collect后添加hash
-3. supervisor, gunicorn, nginx部署配置
-4. rename脚本，可以直接将django-scaffold改为你想要的名字
-5. reset_port脚本，可以将gunicorn, nginx, supervisor中django运行的端口改为你期望的端口号
-6. install脚本，一键安装依赖
-7. config_nginx脚本，当你修改代码的nginx配置时,执行此脚本可以更新nginx
-8. run脚本，分为可以简化django启停命令，分为dev和master两种环境
-9. memcached
+1. mako支持: template可以随意使用python语法
+2. 静态文件collect后添加hash: 再也不用怕更新静态文件后缓存不变了
+3. supervisor, gunicorn, nginx部署配置: 生产环境配置就不用说了
+4. rename脚本，可以直接将django-scaffold改为你想要的名字: 脚手架
+5. reset_port脚本，可以将gunicorn, nginx, supervisor中django运行的端口改为你期望的端口号: 脚手架
+6. install脚本: 一键安装依赖, 可以根据这个脚本手动安装
+7. config_nginx脚本，当你修改代码的nginx配置时,执行此脚本可以更新nginx: 缓解nginx小白的一点点困惑
+8. run脚本，分为可以简化django启停命令，分为dev和master两种环境:
+   看看这个脚本吧
+9. memcached: 缓存就不用说了
+10. xadmin: admin很强大，但是如果做出一套系统给别人用，原生的admin实在是无力吐槽
+11. 单元测试时默认使用sqlite3: 让单元测试飞起来
 
 将来提供什么 TODO List
 ---
 
-    . xadmin或者xadmin2
-    . python-oauth的一个fork版本，添加weibo, weixin等中国backend
+    . 支持中国社交网站的三方登录
     . 传文件
     . 切图片
     . 分页
     . rest service
     . 权限的一些东西
     . 正式上线修改nginx域名的脚本
-    . 单元测试时的sqlite数据库
 
 document
 ===

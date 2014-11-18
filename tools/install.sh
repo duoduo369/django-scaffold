@@ -6,6 +6,8 @@ if [ "x$(whoami)" != "xroot" ]; then
 fi
 
 echo "install linux dependence"
+apt-get install python-dev
+apt-get install mysql-server mysql-client libmysqlclient-dev
 apt-get install memcached nginx
 
 echo "install pip"

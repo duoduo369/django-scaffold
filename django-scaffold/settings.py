@@ -2,6 +2,7 @@
 # Django settings for django-scaffold project.
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 import os
 import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -9,22 +10,46 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+FEATURES = {
+    'ENABLE_DJANGO_ADMIN_SITE': True,
+    'ENABLE_DJANGO_XADMIN_SITE': True,
+    'USE_SQLITE3': False,
+}
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
 
+# db config
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dev',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+if FEATURES.get('USE_SQLITE3'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'dev.db',
+        }
+    }
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        }
+    }
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
@@ -126,8 +151,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -153,3 +176,17 @@ CACHES = {
         ],
     },
 }
+
+# FEATURES
+# 开启admin
+if DEBUG or FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
+    INSTALLED_APPS += (
+        'django.contrib.admin',
+    )
+
+# 开启xadmin
+if DEBUG or FEATURES.get('ENABLE_DJANGO_XADMIN_SITE'):
+    INSTALLED_APPS += (
+        'xadmin',
+        'crispy_forms',
+    )

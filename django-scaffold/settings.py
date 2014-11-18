@@ -65,6 +65,11 @@ TIME_ZONE = 'Asia/Shanghai'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'zh-CN'
 
+LANGUAGES = (
+    ('en', 'English'),
+    ('zh-cn', 'Simplified Chinese'),
+)
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not

@@ -5,7 +5,11 @@ case $1 in
         exit ${ret}
         ;;
     "stop")
-        netstat -ntlp | grep 10000 | awk '{print $7}' | awk -F/ '/^[0-9]/ {print $1}' | uniq | xargs kill
+        if [ $(netstat -ntlp | grep 10000 | awk '{print $7}' | awk -F/ '/^[0-9]/ {print $1}' | uniq | wc -l) = 0 ]; then
+          touch /var
+        else
+          netstat -ntlp | grep 10000 | awk '{print $7}' | awk -F/ '/^[0-9]/ {print $1}' | uniq | xargs kill
+        fi
         ;;
     "restart")
         $0 stop

@@ -66,7 +66,7 @@ TIME_ZONE = 'Asia/Shanghai'
 LANGUAGE_CODE = 'zh-CN'
 
 LANGUAGES = (
-    ('en', 'English'),
+    # ('en', 'English'),
     ('zh-cn', 'Simplified Chinese'),
 )
 

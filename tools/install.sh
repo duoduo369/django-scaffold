@@ -8,7 +8,7 @@ fi
 echo "install linux dependence"
 apt-get install python-dev
 apt-get install mysql-server mysql-client libmysqlclient-dev
-apt-get install memcached nginx
+apt-get install memcached nginx gettext
 
 echo "install pip"
 apt-get install python-pip

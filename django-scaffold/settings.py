@@ -13,7 +13,10 @@ TEMPLATE_DEBUG = DEBUG
 FEATURES = {
     'ENABLE_DJANGO_ADMIN_SITE': True,
     'ADMIN_LIB': 'xadmin', # 可以在 xadmin, admin中选择，admin
-                           # 因为两者使用方式略有不同, 最好在项目开始确定
+                           # 二者不能同时使用，admin的用法看文档
+                           # xadmin的Admin集成自object,
+                           # register时使用xadmin.site.register
+                           # 文件放在 adminx.py 而不是admin.py
     'USE_SQLITE3': False,
     'EMAIL_AS_USERNAME': True,
 }

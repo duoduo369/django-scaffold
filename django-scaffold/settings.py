@@ -14,6 +14,7 @@ FEATURES = {
     'ENABLE_DJANGO_ADMIN_SITE': True,
     'ENABLE_DJANGO_XADMIN_SITE': True,
     'USE_SQLITE3': False,
+    'EMAIL_AS_USERNAME': True,
 }
 
 ADMINS = (
@@ -200,3 +201,23 @@ if DEBUG or FEATURES.get('ENABLE_DJANGO_XADMIN_SITE'):
         'xadmin',
         'crispy_forms',
     )
+
+if FEATURES.get('EMAIL_AS_USERNAME'):
+    INSTALLED_APPS += (
+        'emailusernames',
+    )
+
+    AUTHENTICATION_BACKENDS = (
+        'emailusernames.backends.EmailAuthBackend',
+    )
+
+# 如果你有其他的AUTHENTICATION_BACKENDS请加在这里
+# 如果你有非常复杂的AUTHENTICATION_BACKENDS顺序
+# 请直接重写这个tuple，但是注意EMAIL_AS_USERNAME的这个FEATURE
+# 如果启用这个FEATURE, 需要关掉django默认的Backend，默认用email
+#    AUTHENTICATION_BACKENDS = (
+#        'emailusernames.backends.EmailAuthBackend',
+#        # Uncomment the following to make Django tests pass:
+#        # 'django.contrib.auth.backends.ModelBackend',
+#    )
+AUTHENTICATION_BACKENDS += ()

@@ -17,6 +17,25 @@ FEATURES = {
     'EMAIL_AS_USERNAME': True,
 }
 
+#   启用EMAIL_AS_USERNAME: True后会使用 email作为用户名
+#   实际上就是将user的username = email, 其他的用户名之类的请放到profile里面
+#   https://github.com/dabapps/django-email-as-username
+#
+#   from emailusernames.utils import create_user, create_superuser
+#
+#   create_user('me@example.com', 'password')
+#   当然也可以知己诶把user的username设置为email就ok了
+#   create_superuser('admin@example.com', 'password')
+#   from emailusernames.utils import get_user, user_exists
+#
+#   user = get_user('someone@example.com')
+#   ...
+#
+#   if user_exists('someone@example.com'):
+#       ...
+#
+#
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -120,6 +139,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'pipeline.finders.PipelineFinder',
+    'pipeline.finders.CachedFileFinder',
 )
 
 # Make this unique, and don't share it with anybody.

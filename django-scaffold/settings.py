@@ -46,6 +46,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+AUTH_PROFILE_MODULE = 'myauth.UserProfile'
+
 # db config
 
 DATABASES = {

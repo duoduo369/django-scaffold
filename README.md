@@ -87,6 +87,8 @@ dev master两个环境:
 9. memcached: 缓存就不用说了
 10. xadmin: admin很强大，但是如果做出一套系统给别人用，原生的admin实在是无力吐槽
 11. 单元测试时默认使用sqlite3: 让单元测试飞起来
+12. 使用邮箱做用户名, 可以选择开启或者关闭,
+    这个在项目初期最好就确定(before first syncdb)
 
 将来提供什么 TODO List
 ---

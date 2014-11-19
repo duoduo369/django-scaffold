@@ -19,6 +19,7 @@ class UserProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('修改日期'))
 
     class Meta:
+        app_label = _('附加权限信息')
         db_table = "auth_userprofile"
         verbose_name = _('用户附加信息')
         verbose_name_plural = _('用户附加信息')

@@ -12,7 +12,8 @@ TEMPLATE_DEBUG = DEBUG
 
 FEATURES = {
     'ENABLE_DJANGO_ADMIN_SITE': True,
-    'ENABLE_DJANGO_XADMIN_SITE': True,
+    'ADMIN_LIB': 'xadmin', # 可以在 xadmin, admin中选择，admin
+                           # 因为两者使用方式略有不同, 最好在项目开始确定
     'USE_SQLITE3': False,
     'EMAIL_AS_USERNAME': True,
 }
@@ -183,6 +184,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
+    # 'app', # clone后默认的小demo
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -211,17 +213,19 @@ CACHES = {
 
 # FEATURES
 # 开启admin
-if DEBUG or FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
-    INSTALLED_APPS += (
-        'django.contrib.admin',
-    )
+if FEATURES.get('ADMIN_LIB', '') == 'admin':
+    if DEBUG or FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
+        INSTALLED_APPS += (
+            'django.contrib.admin',
+        )
 
 # 开启xadmin
-if DEBUG or FEATURES.get('ENABLE_DJANGO_XADMIN_SITE'):
-    INSTALLED_APPS += (
-        'xadmin',
-        'crispy_forms',
-    )
+if FEATURES.get('ADMIN_LIB', '') == 'xadmin':
+    if DEBUG or FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
+        INSTALLED_APPS += (
+            'xadmin',
+            'crispy_forms',
+        )
 
 if FEATURES.get('EMAIL_AS_USERNAME'):
     INSTALLED_APPS += (

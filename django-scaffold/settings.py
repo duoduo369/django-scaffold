@@ -187,6 +187,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
+    'myauth', # 自定义权限相关的东西放在这里
     'app', # clone后默认的小demo
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -233,12 +234,9 @@ if FEATURES.get('ADMIN_LIB', '') == 'xadmin':
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 if FEATURES.get('EMAIL_AS_USERNAME'):
-    INSTALLED_APPS += (
-        'emailusernames',
-    )
 
     AUTHENTICATION_BACKENDS = (
-        'emailusernames.backends.EmailAuthBackend',
+        'myauth.backends.EmailAuthBackend',
     )
 
 # 如果你有其他的AUTHENTICATION_BACKENDS请加在这里

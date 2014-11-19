@@ -184,7 +184,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
-    # 'app', # clone后默认的小demo
+    'app', # clone后默认的小demo
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -226,6 +226,8 @@ if FEATURES.get('ADMIN_LIB', '') == 'xadmin':
             'xadmin',
             'crispy_forms',
         )
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 if FEATURES.get('EMAIL_AS_USERNAME'):
     INSTALLED_APPS += (

@@ -89,6 +89,7 @@ dev master两个环境:
 11. 单元测试时默认使用sqlite3: 让单元测试飞起来
 12. 使用邮箱做用户名, 可以选择开启或者关闭,
     这个在项目初期最好就确定(before first syncdb)
+13. south: 并且提供了几个south的使用脚本
 
 将来提供什么 TODO List
 ---

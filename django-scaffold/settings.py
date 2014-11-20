@@ -252,3 +252,9 @@ if FEATURES.get('EMAIL_AS_USERNAME'):
 #        # 'django.contrib.auth.backends.ModelBackend',
 #    )
 AUTHENTICATION_BACKENDS += ()
+
+# 个人配置或者一些不想丢到git里面的配置
+try:
+    from .local_settings import *
+except ImportError:
+    pass

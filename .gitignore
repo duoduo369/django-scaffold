@@ -1,3 +1,4 @@
 *pyc
 statics/*
 *db
+local_settings.py

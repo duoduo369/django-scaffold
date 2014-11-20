@@ -189,6 +189,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
+    'south',
     'myauth', # 自定义权限相关的东西放在这里
     'app', # clone后默认的小demo
     # Uncomment the next line to enable admin documentation:

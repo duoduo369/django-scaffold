@@ -1,14 +1,17 @@
 #!coding: utf-8
 '''
-    执行此脚本时 必须在项目目录下 而不是scripts 下 
-    此脚本在有数据库表结构更改时使用 使用工具: South
-    使用方法:
+执行此脚本时 必须在项目目录下 而不是scripts 下 
+此脚本在有数据库表结构更改时使用 使用工具: South
+使用方法:
 
-      git pull 之前
-        python scripts/south_migrate.py init app1,app2,app3
+git pull 之前
 
-      git pull 之后
-        python scripts/south_migrate.py auto app1,app2,app3
+   python scripts/south_migrate.py init app1,app2,app3
+
+git pull 之后
+
+   python scripts/south_migrate.py auto app1,app2,app3
+
 '''
 
 import os

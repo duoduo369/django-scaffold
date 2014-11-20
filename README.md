@@ -76,7 +76,7 @@ dev master两个环境:
 脚手架目前提供了什么
 ---
 1. mako支持: template可以随意使用python语法
-2. 静态文件collect后添加hash: 再也不用怕更新静态文件后缓存不变了
+2. 静态文件collect后添加hash: 再也不用怕更新静态文件后缓存不变了(不适用云存储)
 3. supervisor, gunicorn, nginx部署配置: 生产环境配置就不用说了
 4. rename脚本，可以直接将django-scaffold改为你想要的名字: 脚手架
 5. reset_port脚本，可以将gunicorn, nginx, supervisor中django运行的端口改为你期望的端口号: 脚手架
@@ -90,6 +90,7 @@ dev master两个环境:
 12. 使用邮箱做用户名, 可以选择开启或者关闭,
     这个在项目初期最好就确定(before first syncdb)
 13. south: 并且提供了几个south的使用脚本
+14. 文件系统可以选择使用云存储，默认七牛
 
 将来提供什么 TODO List
 ---

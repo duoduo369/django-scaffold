@@ -19,6 +19,7 @@ FEATURES = {
                            # 文件放在 adminx.py 而不是admin.py
     'USE_SQLITE3': False,
     'EMAIL_AS_USERNAME': True,
+    'USE_YUN_STORAGE': False
 }
 
 #   启用EMAIL_AS_USERNAME: True后会使用 email作为用户名
@@ -254,6 +255,19 @@ if FEATURES.get('EMAIL_AS_USERNAME'):
 AUTHENTICATION_BACKENDS += ()
 
 # 个人配置或者一些不想丢到git里面的配置
+if FEATURES.get('USE_YUN_STORAGE'):
+    # 默认选择七牛
+    # Doc: https://github.com/duoduo369/django-qiniu-storage
+    QINIU_ACCESS_KEY = ''
+    QINIU_SECRET_KEY = ''
+    QINIU_BUCKET_NAME = ''
+    QINIU_BUCKET_DOMAIN = ''
+
+    STATIC_ROOT = 'statics' # 这里要使用这种相对路径
+    DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+    STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
+
+
 try:
     from .local_settings import *
 except ImportError:

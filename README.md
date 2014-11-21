@@ -90,7 +90,7 @@ dev master两个环境:
 12. 使用邮箱做用户名, 可以选择开启或者关闭,
     这个在项目初期最好就确定(before first syncdb)
 13. south: 并且提供了几个south的使用脚本
-14. 文件系统可以选择使用云存储，默认七牛
+14. 静态文件系统可以选择使用云存储，默认七牛(dev模式下回关闭云存储)
 
 将来提供什么 TODO List
 ---
@@ -105,6 +105,19 @@ dev master两个环境:
 
 document
 ===
+
+feature
+---
+####USE_YUN_STORAGE 使用云存储
+默认是采用pipeline即在某台linux上面做静态文件，nginx代理到此处, 这种方式会在静态文件上加hash
+
+云存储默认有七牛，默认不加hash, 如果使用hash版本的话, manage command使用eccollect的这些
+第一次需要采用 `python manage.py createstaticmanifest`, 之后collect是使用 `python manage.py eccollect`
+
+    [ecstatic]
+        createstaticmanifest
+        eccollect
+        hashmedianames
 
 tools
 ---

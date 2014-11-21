@@ -2,3 +2,4 @@
 statics/*
 *db
 local_settings.py
+staticmanifest.json

@@ -19,7 +19,7 @@ FEATURES = {
                            # 文件放在 adminx.py 而不是admin.py
     'USE_SQLITE3': False,
     'EMAIL_AS_USERNAME': True,
-    'USE_YUN_STORAGE': False
+    'USE_YUN_STORAGE': False,
 }
 
 #   启用EMAIL_AS_USERNAME: True后会使用 email作为用户名
@@ -191,6 +191,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'pipeline',
     'south',
+    'ecstatic',
     'myauth', # 自定义权限相关的东西放在这里
     'app', # clone后默认的小demo
     # Uncomment the next line to enable admin documentation:
@@ -254,6 +255,8 @@ if FEATURES.get('EMAIL_AS_USERNAME'):
 #    )
 AUTHENTICATION_BACKENDS += ()
 
+ECSTATIC_MANIFEST_FILE = os.path.join(BASE_DIR, 'staticmanifest.json')
+
 # 个人配置或者一些不想丢到git里面的配置
 if FEATURES.get('USE_YUN_STORAGE'):
     # 默认选择七牛
@@ -264,8 +267,12 @@ if FEATURES.get('USE_YUN_STORAGE'):
     QINIU_BUCKET_DOMAIN = ''
 
     STATIC_ROOT = 'statics' # 这里要使用这种相对路径
+    # 下面这两行是指在七牛云里面静态文件没有hash码
     DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
     STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
+    # 下面这两行是指在七牛云里面添加hash码
+    #DEFAULT_FILE_STORAGE = 'custom_django_partial.storages.QiniuCachedMediaStorage'
+    #STATICFILES_STORAGE  = 'custom_django_partial.storages.QiniuCachedStaticStorage'
 
 
 try:

@@ -7,3 +7,5 @@ LOGGING = logsettings.get_logger_config(debug=DEBUG)
 INSTALLED_APPS += (
     'app',
 )
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'

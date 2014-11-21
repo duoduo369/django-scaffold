@@ -36,7 +36,10 @@ def pre_save_user_handler(sender, instance, **kwargs):
 
 @receiver(post_save, sender=User)
 def post_save_user_handler(sender, instance, created, **kwargs):
-    profile = UserProfile(user=instance)
+    try:
+        profile = instance.profile
+    except UserProfile.DoesNotExist:
+        profile = UserProfile(user=instance)
     profile.save()
 
 @receiver(pre_save, sender=UserProfile)

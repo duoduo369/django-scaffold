@@ -169,6 +169,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'custom_django_partial.middleware.HttpResponseNotAllowedMiddleware',
     'djangomako.middleware.MakoMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
 )

@@ -275,10 +275,9 @@ if FEATURES.get('USE_YUN_STORAGE'):
 
     # 下面这两行是指在七牛云里面静态文件没有hash码
     DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-    STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
-    # 下面这两行是指在七牛云里面添加hash码
-    #DEFAULT_FILE_STORAGE = 'custom_django_partial.storages.QiniuCachedMediaStorage'
-    #STATICFILES_STORAGE  = 'custom_django_partial.storages.QiniuCachedStaticStorage'
+    # STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
+    # 下面这这行是指在七牛云里面添加hash码, 注意只要静态文件这个
+    STATICFILES_STORAGE  = 'custom_django_partial.storages.QiniuCachedStaticStorage'
 
 
 try:

@@ -116,7 +116,10 @@ LOCALE_PATHS = (
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = 'medias'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'medias') # 如果不用云存储使用绝对路径
+
+if FEATURES.get('USE_YUN_STORAGE'):
+    MEDIA_ROOT = 'medias' # 云存储使用这种相对路径
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -128,6 +131,9 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'statics') # 如果不用云存储使用绝对路径
+
+if FEATURES.get('USE_YUN_STORAGE'):
+    STATIC_ROOT = 'statics' # 云存储使用这种相对路径
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -267,7 +273,6 @@ if FEATURES.get('USE_YUN_STORAGE'):
     QINIU_BUCKET_NAME = ''
     QINIU_BUCKET_DOMAIN = ''
 
-    STATIC_ROOT = 'statics' # 这里要使用这种相对路径
     # 下面这两行是指在七牛云里面静态文件没有hash码
     DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
     STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'

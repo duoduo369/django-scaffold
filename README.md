@@ -112,7 +112,7 @@ feature
 默认是采用pipeline即在某台linux上面做静态文件，nginx代理到此处, 这种方式会在静态文件上加hash
 
 云存储默认有七牛，默认不加hash, 如果使用hash版本的话, manage command使用eccollect的这些
-第一次需要采用 `python manage.py createstaticmanifest`, 之后collect是使用 `python manage.py eccollect`
+当添加了新的js时， 需要采用 `python manage.py createstaticmanifest`, 之后collect是使用 `python manage.py eccollect`
 
     [ecstatic]
         createstaticmanifest

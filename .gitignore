@@ -1,5 +1,6 @@
 *pyc
 statics/*
 *db
+medias/*
 local_settings.py
 staticmanifest.json

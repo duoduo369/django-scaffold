@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 <%namespace name='static' file='/common/static_pipeline.html'/>
 <html>
   <head>
@@ -35,6 +36,14 @@
           browse_button: 'browse', // this can be an id of a DOM element or the DOM element itself
           url: '/fileupload',
           headers: {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'},
+          resize: {
+            width: 100,
+            height: 100
+          },
+          filters: {
+            mime_types: [{ title : "图片", extensions : "jpg,jpeg,png" }],
+            max_file_size: "1mb",
+          },
           multipart_params: {
             csrfmiddlewaretoken: '${csrf_token}',
           },
@@ -44,10 +53,11 @@
       function showImagePreview(file, toDom ) {
         var item = $( "<li id="+ file.id + "></li>" ).prependTo( toDom );
         var image = $( new Image() ).appendTo( item );
+        image.addClass('preview')
         $('<b></b>').appendTo(item);
         var preloader = new mOxie.Image();
         preloader.onload = function() {
-            preloader.downsize( 300, 300 );
+            preloader.downsize( 100, 100 );
             image.prop( "src", preloader.getAsDataURL() );
         };
         preloader.load( file.getSource() );

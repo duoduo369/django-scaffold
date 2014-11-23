@@ -22,15 +22,20 @@ isort==3.9.0
 logilab-common==0.63.0
 meld3==1.0.0
 natsort==3.5.1
+oauthlib==0.7.2
 pies==2.6.1
 pies2overrides==2.6.1
 pylint==1.3.1
 pylint-django==0.5.5
 pylint-plugin-utils==0.2.2
 python-memcached==1.53
+python-openid==2.2.5
+-e git+https://github.com/duoduo369/python-social-auth.git@d84b0a0c882737971787b6a4da20733301de56b6#egg=python_social_auth-stable_0.1.26.1
+-e git+https://github.com/duoduo369/django-social-auth.git@a42925ab1e8afd0880c0ff624ebce160d1bdb965#egg=django_social_auth-origin/HEAD
 pytz==2014.9
 qiniu==6.1.9
 requests==2.4.3
+requests-oauthlib==0.4.2
 sh==1.09
 six==1.8.0
 supervisor==3.1.3

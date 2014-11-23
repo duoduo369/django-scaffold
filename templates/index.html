@@ -3,10 +3,9 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>django pipeline demo</title>
-
     <link rel="stylesheet" href="${static.url('css/index.css')}" type="text/css" media="all" />
-
     <style type="text/css">p { border:5px solid green;}</style>
+    <script type="text/javascript" charset="utf-8" src="${static.url('js/jquery-2.1.1.min.js')}"> </script>
     <script type="text/javascript" charset="utf-8" src="${static.url('js/index.js')}"> </script>
     <script type="text/javascript" charset="utf-8" src="${static.url('js/plupload.full.min.js')}"> </script>
   </head>
@@ -19,6 +18,8 @@
       none
     </div>
     <ul id="filelist"></ul>
+    <br />
+    <img src="" alt=""/>
     <br />
 
     <div id="container">
@@ -40,12 +41,25 @@
       });
 
       uploader.init();
+      function showImagePreview(file, toDom ) {
+        var item = $( "<li></li>" ).prependTo( toDom );
+        var image = $( new Image() ).appendTo( item );
+        var preloader = new mOxie.Image();
+        preloader.onload = function() {
+            preloader.downsize( 300, 300 );
+            image.prop( "src", preloader.getAsDataURL() );
+        };
+        preloader.load( file.getSource() );
+      }
       uploader.bind('FilesAdded', function(up, files) {
-          var html = '';
+          dom = $('#filelist')
           plupload.each(files, function(file) {
-              html += '<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>';
+            if(!file.type.match('image')){
+              $('<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>').appendTo(dom)
+            } else {
+              showImagePreview(file, dom)
+            }
           });
-          document.getElementById('filelist').innerHTML += html;
       });
       uploader.bind('UploadProgress', function(up, file) {
           document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";

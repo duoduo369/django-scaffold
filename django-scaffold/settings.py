@@ -18,8 +18,9 @@ FEATURES = {
                            # register时使用xadmin.site.register
                            # 文件放在 adminx.py 而不是admin.py
     'USE_SQLITE3': False,
-    'EMAIL_AS_USERNAME': True,
+    'EMAIL_AS_USERNAME': False, # 使用邮箱做用户名
     'USE_YUN_STORAGE': False,
+    'ENABLE_SOCIAL_AUTH': False, # 启用三分登陆
 }
 
 #   启用EMAIL_AS_USERNAME: True后会使用 email作为用户名
@@ -180,6 +181,17 @@ MIDDLEWARE_CLASSES = (
     'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
+# django默认的 TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+)
+
 ROOT_URLCONF = 'django-scaffold.urls'
 
 
@@ -245,22 +257,6 @@ if FEATURES.get('ADMIN_LIB', '') == 'xadmin':
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
-if FEATURES.get('EMAIL_AS_USERNAME'):
-
-    AUTHENTICATION_BACKENDS = (
-        'myauth.backends.EmailAuthBackend',
-    )
-
-# 如果你有其他的AUTHENTICATION_BACKENDS请加在这里
-# 如果你有非常复杂的AUTHENTICATION_BACKENDS顺序
-# 请直接重写这个tuple，但是注意EMAIL_AS_USERNAME的这个FEATURE
-# 如果启用这个FEATURE, 需要关掉django默认的Backend，默认用email
-#    AUTHENTICATION_BACKENDS = (
-#        'emailusernames.backends.EmailAuthBackend',
-#        # Uncomment the following to make Django tests pass:
-#        # 'django.contrib.auth.backends.ModelBackend',
-#    )
-AUTHENTICATION_BACKENDS += ()
 
 ECSTATIC_MANIFEST_FILE = os.path.join(BASE_DIR, 'staticmanifest.json')
 
@@ -278,6 +274,114 @@ if FEATURES.get('USE_YUN_STORAGE'):
     # STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
     # 下面这这行是指在七牛云里面添加hash码, 注意只要静态文件这个
     STATICFILES_STORAGE  = 'custom_django_partial.storages.QiniuCachedStaticStorage'
+
+if FEATURES.get('EMAIL_AS_USERNAME'):
+
+    AUTHENTICATION_BACKENDS = (
+        'myauth.backends.EmailAuthBackend',
+    )
+
+# 如果你有其他的AUTHENTICATION_BACKENDS请加在这里
+# 如果你有非常复杂的AUTHENTICATION_BACKENDS顺序
+# 请直接重写这个tuple，但是注意EMAIL_AS_USERNAME的这个FEATURE
+# 如果启用这个FEATURE, 需要关掉django默认的Backend，默认用email
+#    AUTHENTICATION_BACKENDS = (
+#        'emailusernames.backends.EmailAuthBackend',
+#        # Uncomment the following to make Django tests pass:
+#        # 'django.contrib.auth.backends.ModelBackend',
+#    )
+#
+# 如果有其他AUTHENTICATION_BACKENDS的配置，在settings.py最下面重写
+
+if FEATURES.get('ENABLE_SOCIAL_AUTH'):
+
+    if FEATURES.get('EMAIL_AS_USERNAME'):
+        assert 0, u'你启用了EMAIL_AS_USERNAME请自行配置下面的backends'
+
+    INSTALLED_APPS += (
+        'social_auth',
+    )
+    #######################  oauth  ###################################
+
+    AUTHENTICATION_BACKENDS = (
+        # 去掉注释开启下面的oauth
+        #'social_auth.backends.contrib.douban.Douban2Backend',
+        #'social_auth.backends.contrib.qq.QQBackend',
+        #'social_auth.backends.contrib.weibo.WeiboBackend',
+        #'social_auth.backends.contrib.renren.RenRenBackend',
+        #'social_auth.backends.contrib.baidu.BaiduBackend',
+        #'social_auth.backends.contrib.weixin.WeixinBackend',
+        'django.contrib.auth.backends.ModelBackend',
+        # 使用EMAIL_AS_USERNAME, 注释掉 django.contrib.auth.backends.ModelBackend
+        # 解开下行的注释, 去掉上面的assert 0
+        # 'myauth.backends.EmailAuthBackend',
+    )
+
+
+    TEMPLATE_CONTEXT_PROCESSORS += (
+        'django.contrib.auth.context_processors.auth',
+        # login in htemplate can use "{% url socialauth_begin 'douban-oauth2' %}"
+        'social_auth.context_processors.social_auth_by_type_backends',
+        'social_auth.context_processors.social_auth_login_redirect',
+    )
+
+
+    SOCIAL_AUTH_PIPELINE = (
+        'social.pipeline.social_auth.social_details',
+        'social.pipeline.social_auth.social_uid',
+        'social.pipeline.social_auth.auth_allowed',
+        'social.pipeline.partial.save_status_to_session',
+        'social.pipeline.social_auth.save_authentication_user_detail_to_session',
+    )
+    # 注意我在SOCIAL_AUTH_PIPELINE并没有使用文档里面的一些pipeline
+    # 因为文档中的pipeline会在新auth的时候创建新的django用户，当使用
+    # 邮箱作为名字的时候搞不定, 因此我将注册流程从默认的SOCIAL_AUTH_PIPELINE中截断,
+    # (有时候你想在三分用户输入用户名密码成功回跳后让用户绑定邮箱之类的),
+    # 重写了django-social-auth使得在SOCIAL_AUTH_AUTHENTICATION_SUCCESS_URL
+    # 的sessions中将三方返回的信息都放在一个叫做authentication_user_detail的
+    # request.session.get('authentication_user_detail')
+    # 之后根据这些信息来创建用户等等满足你自己注册需求
+
+
+    SOCIAL_AUTH_DISCONNECT_PIPELINE = (
+        # Verifies that the social association can be disconnected from the current
+        # user (ensure that the user login mechanism is not compromised by this
+        # disconnection).
+        'social.pipeline.disconnect.allowed_to_disconnect',
+        # Collects the social associations to disconnect.
+        'social.pipeline.disconnect.get_entries',
+        # Revoke any access_token when possible.
+        'social.pipeline.disconnect.revoke_tokens',
+        # Removes the social associations.
+        'social.pipeline.disconnect.disconnect'
+    )
+
+    SOCIAL_AUTH_LOGIN_URL = '/login-url'
+    SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error'
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in'
+    SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url'
+    SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url'
+    SOCIAL_AUTH_BACKEND_ERROR_URL = '/new-error-url'
+    SOCIAL_AUTH_AUTHENTICATION_SUCCESS_URL = '/authentication_success_url'
+
+    SOCIAL_AUTH_WEIBO_KEY = ''
+    SOCIAL_AUTH_WEIBO_SECRET = ''
+
+    SOCIAL_AUTH_QQ_KEY = ''
+    SOCIAL_AUTH_QQ_SECRET = ''
+
+    SOCIAL_AUTH_DOUBAN_OAUTH2_KEY = ''
+    SOCIAL_AUTH_DOUBAN_OAUTH2_SECRET = ''
+
+    SOCIAL_AUTH_RENREN_KEY = ''
+    SOCIAL_AUTH_RENREN_SECRET = ''
+
+    SOCIAL_AUTH_BAIDU_KEY = ''
+    SOCIAL_AUTH_BAIDU_SECRET = ''
+
+    SOCIAL_AUTH_WEIXIN_KEY = ''
+    SOCIAL_AUTH_WEIXIN_SECRET = ''
+    SOCIAL_AUTH_WEIXIN_SCOPE = ['snsapi_login',]
 
 
 try:

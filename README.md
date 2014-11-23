@@ -96,7 +96,7 @@ dev master两个环境:
 将来提供什么 TODO List
 ---
 
-    . 支持中国社交网站的三方登录
+    . 支持中国社交网站的三方登录: 已经添加fork后的social auth库以及配置
     . 切图片: 现在已经有了client端的解决方案, plupload, 后端可以用pillow
     . 分页
     . rest service

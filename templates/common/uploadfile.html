@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+<%def name='plupload_default_config()'>
+  {
+      browse_button: 'browse',
+      url: '/fileupload',
+      headers: {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'},
+      resize: {
+        width: 100,
+        height: 100
+      },
+      filters: {
+        mime_types: [{ title : "图片", extensions : "jpg,jpeg,png" }],
+        max_file_size: "1mb",
+      },
+      multipart_params: {
+        csrfmiddlewaretoken: '${csrf_token}',
+      },
+  }
+</%def>

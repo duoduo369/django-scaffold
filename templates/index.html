@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 <%namespace name='static' file='/common/static_pipeline.html'/>
+<%namespace name='upload_lib' file='/common/uploadfile.html'/>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -32,22 +33,9 @@
       <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}"/>
     </form>
     <script type="text/javascript">
-      var uploader = new plupload.Uploader({
-          browse_button: 'browse', // this can be an id of a DOM element or the DOM element itself
-          url: '/fileupload',
-          headers: {'X-Requested-With' : 'XMLHttpRequest', 'X-CSRFToken' : '${csrf_token}'},
-          resize: {
-            width: 100,
-            height: 100
-          },
-          filters: {
-            mime_types: [{ title : "图片", extensions : "jpg,jpeg,png" }],
-            max_file_size: "1mb",
-          },
-          multipart_params: {
-            csrfmiddlewaretoken: '${csrf_token}',
-          },
-      });
+
+      var config = ${upload_lib.plupload_default_config()};
+      var uploader = new plupload.Uploader(config);
 
       uploader.init();
       function showImagePreview(file, toDom ) {

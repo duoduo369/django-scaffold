@@ -42,8 +42,9 @@
 
       uploader.init();
       function showImagePreview(file, toDom ) {
-        var item = $( "<li></li>" ).prependTo( toDom );
+        var item = $( "<li id="+ file.id + "></li>" ).prependTo( toDom );
         var image = $( new Image() ).appendTo( item );
+        $('<b></b>').appendTo(item);
         var preloader = new mOxie.Image();
         preloader.onload = function() {
             preloader.downsize( 300, 300 );
@@ -55,7 +56,7 @@
           dom = $('#filelist')
           plupload.each(files, function(file) {
             if(!file.type.match('image')){
-              $('<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>').appendTo(dom)
+              $('<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b ></b></li>').appendTo(dom)
             } else {
               showImagePreview(file, dom)
             }

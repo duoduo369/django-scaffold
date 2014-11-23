@@ -63,6 +63,16 @@
       uploader.bind('UploadProgress', function(up, file) {
           document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
       });
+      uploader.bind('QueueChanged', function(up, file){
+          if(up.files.length > 1){
+            up.files.splice(1, up.files.length);
+            this.trigger('Error', {
+              code : plupload.FILE_DUPLICATE_ERROR,
+              message : plupload.translate('Duplicate file error.'),
+              file : file
+            });
+          }
+      })
       uploader.bind('Error', function(up, err) {
           document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
       });

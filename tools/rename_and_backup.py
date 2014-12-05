@@ -27,7 +27,7 @@ def rename(newname):
         mv(django_settings_dir, os.path.join(new_project_path, newname))
     for nginx_conf in NGINX_CONFS:
         file_path = os.path.join(new_project_path, nginx_conf)
-        mv(nginx_conf.format(file_path, oldname), nginx_conf.format(file_path, newname))
+        mv(file_path.format(oldname), file_path.format(newname))
     cmd ='cd {} && grep {} -ril ./ | xargs sed -i "s/{}/{}/g"'.format(new_project_path, oldname, oldname, newname)
     os.system(cmd)
     click.echo('new files in {}'.format(new_project_path))

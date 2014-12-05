@@ -14,7 +14,7 @@ django-mako==0.1.3
 -e git+git@github.com:duoduo369/django-paginator-plus.git@937e8f100e4c2d67f5ab3ead6a6a3fc62268a752#egg=django_paginator_plus-v0.1
 django-pipeline==1.3.26
 -e git+git@github.com:duoduo369/django-qiniu-storage.git@1b12eb14222fa2470e06e5bc07e239b7368ba691#egg=django_qiniu_storage-master
--e git+https://github.com/duoduo369/django-social-auth.git@a42925ab1e8afd0880c0ff624ebce160d1bdb965#egg=django_social_auth-origin/HEAD
+-e git+https://github.com/duoduo369/django-social-auth.git@a42925ab1e8afd0880c0ff624ebce160d1bdb965#egg=django_social_auth
 -e git+https://github.com/duoduo369/django-xadmin.git@fc0736a89caa887456f1104464d370eea0ce9a45#egg=django_xadmin-0.5.1
 enum34==1.0.3
 futures==2.2.0

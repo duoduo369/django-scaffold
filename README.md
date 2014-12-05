@@ -42,8 +42,8 @@ dev master两个环境:
     第二步, 你需要配置项目运行时的端口号`reset_port.py`;
     第三步，安装各种依赖`install.sh`(这个脚本执行一次即可);
     第四步，配置nginx`config_dev_nginx.sh`和`config_dev_nginx.sh`;
-    第五步, 运行项目`run_dev.sh` 和`run_master.sh`.其中你可以看到有dev, master两个版本, dev采用django 默认的runserver来做，并且配置文件中DEBUG=True,master版本采用supervisor, gunicorn来做python容器，静态文件有nginx代理
-
+    第五步, 创建数据库，并且syncdb. create database `配置中的数据库名字` DEFAULT CHARACTER SET utf8 ;
+    第六步, 运行项目`run_dev.sh` 和`run_master.sh`.其中你可以看到有dev, master两个版本, dev采用django                           默认的runserver来做，并且配置文件中DEBUG=True,master版本采用supervisor, gunicorn来做python容器，静态文件有nginx代理,如果是master你需要先collect静态文件
 文件结构
 ---
  $ tree -L 1

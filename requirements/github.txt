@@ -1,0 +1,6 @@
+-e git+https://github.com/duoduo369/python-social-auth.git@d84b0a0c882737971787b6a4da20733301de56b6#egg=python_social_auth-stable_0.1.26.1
+-e git+https://github.com/pennersr/django-pagemore.git@c16c01b6f76b1e1ec544e9e501804c2e165f01c8#egg=django_pagemore-master
+-e git+git@github.com:duoduo369/django-paginator-plus.git@937e8f100e4c2d67f5ab3ead6a6a3fc62268a752#egg=django_paginator_plus-v0.1
+-e git+git@github.com:duoduo369/django-qiniu-storage.git@1b12eb14222fa2470e06e5bc07e239b7368ba691#egg=django_qiniu_storage-master
+-e git+https://github.com/duoduo369/django-social-auth.git@a42925ab1e8afd0880c0ff624ebce160d1bdb965#egg=django_social_auth
+-e git+https://github.com/duoduo369/django-xadmin.git@fc0736a89caa887456f1104464d370eea0ce9a45#egg=django_xadmin-0.5.1

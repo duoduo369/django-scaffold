@@ -14,3 +14,4 @@ user = 'root'
 group = 'root'
 
 pidfile = '/run/django-scaffold-gunicorn.pid'
+errorlog =  '/var/log/django-scaffold/stderr.log'
